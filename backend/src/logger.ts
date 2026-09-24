@@ -29,7 +29,25 @@ export const logger = pino({
     },
   },
   redact: {
-    paths: ['req.headers.authorization', 'headers.authorization', 'address', 'creator'],
+    paths: [
+      'req.headers.authorization',
+      'headers.authorization',
+      'req.headers.cookie',
+      'headers.cookie',
+      'req.body.password',
+      'req.body.secret',
+      'req.body.token',
+      'req.body.api_key',
+      'req.body.apiKey',
+      'req.body.wallet_secret',
+      'req.body.walletSecret',
+      'req.body.private_key',
+      'req.body.privateKey',
+      'req.body.mnemonic',
+      'req.body.seed',
+      'address',
+      'creator',
+    ],
     censor: (value: any, path: string[]) => {
       if (typeof value === 'string' && (path.includes('address') || path.includes('creator')) && value.startsWith('G') && value.length > 50) {
         return `${value.slice(0, 5)}...${value.slice(-5)}`;
